@@ -10,5 +10,4 @@ add_executable(Bulls_and_cows
     main.cpp
     random_digits.cpp
         user_input.cpp
-        loading.cpp
         choose_game.cpp)

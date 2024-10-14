@@ -10,10 +10,12 @@
 #include <iostream>
 #include <vector>
 
+using Numbers = std::vector<int>;
 
-std::vector<int> generateUniqueRandomDigits();
-std::vector<int> getUserInput();
+
+Numbers generateUniqueRandomDigits();
+Numbers getUserInput();
 void loadingSimulation(int seconds);
-std::pair<int, int> countMatches(const std::vector<int>& vec1, const std::vector<int>& vec2);
-std::vector<int> playBullsAndCows(const std::vector<int>& userInput);
+std::pair<int, int> countMatches(const Numbers& vec1, const Numbers& vec2);
+Numbers playBullsAndCows(const Numbers& userInput);
 int chooseGame();

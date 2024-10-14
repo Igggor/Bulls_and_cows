@@ -2,8 +2,9 @@
 #include <vector>
 #include <unordered_set>
 #include <algorithm>
+using Numbers = std::vector<int>;
 
-std::pair<int, int> countMatches(const std::vector<int>& vec1, const std::vector<int>& vec2) {
+std::pair<int, int> countMatches(const Numbers& vec1, const Numbers& vec2) {
     int sameIndexMatches = 0;   // Количество совпадений на одинаковых индексах
     int diffIndexMatches = 0;   // Количество совпадений на разных индексах
 
@@ -27,12 +28,12 @@ std::pair<int, int> countMatches(const std::vector<int>& vec1, const std::vector
 }
 
 // Генерация всех возможных последовательностей
-std::vector<std::vector<int>> generateAllCombinations() {
-    std::vector<std::vector<int>> allCombos;
+std::vector<Numbers> generateAllCombinations() {
+    std::vector<Numbers> allCombos;
 
     // Генерирую все комбинации четырех цифр от 0000 до 9999
     for (int i = 0; i <= 9999; ++i) {
-        std::vector<int> combo;
+        Numbers combo;
         int num = i;
 
         while (combo.size() < 4) {
@@ -46,26 +47,26 @@ std::vector<std::vector<int>> generateAllCombinations() {
     return allCombos;
 }
 
-std::vector<int> playBullsAndCows(const std::vector<int>& userInput) {
-    std::vector<std::vector<int>> comboes = generateAllCombinations();
+Numbers playBullsAndCows(const Numbers& userInput) {
+    std::vector<Numbers> combos = generateAllCombinations();
 
-    std::vector<int> guess;
+    Numbers guess;
     std::pair<int, int> result;
 
     while (result.first != 4) {
-        guess = comboes.front();
+        guess = combos.front();
 
         result = countMatches(userInput, guess); // Проверка количества Быков и Коров
 
-        std::vector<std::vector<int>> filteredCombos; // А тут я сохраняю только те результаты, которые могут потенциально подойти под решение
+        std::vector<Numbers> filteredCombos; // А тут я сохраняю только те результаты, которые могут потенциально подойти под решение
 
-        for (const auto& combo : comboes)
+        for (const auto& combo : combos)
             if (countMatches(guess, combo) == result)
                 filteredCombos.push_back(combo);
 
-        comboes = filteredCombos;
+        combos = filteredCombos;
         std::cout << "Компьютер предполагает: ";
-        for (int num : guess)
+        for (const int num : guess)
             std::cout << num;
         std::cout << ". В результате проверки " << result.first << " быков, " << result.second << " коров" << std::endl;
     }
